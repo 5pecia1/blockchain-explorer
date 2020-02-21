@@ -19,6 +19,29 @@ const explorer_mess = require('../../../common/ExplorerMessage').explorer;
 const ExplorerError = require('../../../common/ExplorerError');
 const FabricConfig = require('../FabricConfig');
 
+const clientCert = `-----BEGIN CERTIFICATE-----
+MIICTzCCAfWgAwIBAgIRAKCUfAdiZh059+bU8jtaMFUwCgYIKoZIzj0EAwIwgYAx
+CzAJBgNVBAYTAktSMQ4wDAYDVQQIEwVCdXNhbjEOMAwGA1UEBxMFQnVzYW4xGzAZ
+BgNVBAoTEnRlcm1pbmFsLml0dC5jby5rcjERMA8GA1UECxMIdGVybWluYWwxITAf
+BgNVBAMTGHRsc2NhLnRlcm1pbmFsLml0dC5jby5rcjAeFw0yMDAyMTAwNjA2MDBa
+Fw0zMDAyMDcwNjA2MDBaMGMxCzAJBgNVBAYTAktSMQ4wDAYDVQQIEwVCdXNhbjEO
+MAwGA1UEBxMFQnVzYW4xETAPBgNVBAsTCHRlcm1pbmFsMSEwHwYDVQQDDBhBZG1p
+bkB0ZXJtaW5hbC5pdHQuY28ua3IwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARD
+PhSpMI1WJ4iHadDzWLgaVe3l83NpSJNUOG2QiF6n8y7o7E0CoqtVPKIDzh8mJ9lc
+qk42vhTagiELHUpjExDKo2wwajAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYI
+KwYBBQUHAwEGCCsGAQUFBwMCMAwGA1UdEwEB/wQCMAAwKwYDVR0jBCQwIoAgYMKu
+3eAydMQUSBaGr7vtdq4L54VgfZzWHOdlspOatacwCgYIKoZIzj0EAwIDSAAwRQIh
+APKgM0Wy/Tzj7SKp01r6ojE9XXVaguxZ6aPWwFefrZ7aAiAOhVKNALNK/UwqfOXs
+Wanfq3+MZx1u7jlfKLQenx2EpQ==
+-----END CERTIFICATE-----
+`;
+const clientKey = `-----BEGIN PRIVATE KEY-----
+MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgub0hbjcUq4a88c47
+ZSWnx0rclUQsJZMmubnbO/PKMQ+hRANCAARDPhSpMI1WJ4iHadDzWLgaVe3l83Np
+SJNUOG2QiF6n8y7o7E0CoqtVPKIDzh8mJ9lcqk42vhTagiELHUpjExDK
+-----END PRIVATE KEY-----
+`;
+
 class FabricGateway {
 	constructor(networkConfig) {
 		this.networkConfig = networkConfig;
@@ -129,9 +152,12 @@ class FabricGateway {
 				discovery: {
 					enabled: true
 				},
-				clientTlsIdentity: this.userName,
 				eventHandlerOptions: {
 					commitTimeout: 100
+				},
+				tlsInfo: {
+					certificate: Buffer.from(clientCert).toString(),
+					key: Buffer.from(clientKey).toString()
 				}
 			};
 

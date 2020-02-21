@@ -2,8 +2,8 @@
 
 #SPDX-License-Identifier: Apache-2.0
 
-FABRIC_EXPLORER_DB_TAG="hyperledger/explorer-db"
-FABRIC_EXPLORER_TAG="hyperledger/explorer"
+FABRIC_EXPLORER_DB_TAG="registry.smartm2m.co.kr/hyperledger/explorer-db"
+FABRIC_EXPLORER_TAG="registry.smartm2m.co.kr/hyperledger/explorer"
 
 function banner(){
 	echo ""
